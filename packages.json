@@ -1,0 +1,22 @@
+[
+    "fortune",
+    "openssl",
+
+    "gcc",
+
+    "cabal-install",
+    "cabal2nix",
+    "stack",
+    "ghc",
+
+    "python3",
+    "racket",
+    "rustc",
+    "cargo",
+    "go",
+    "nodejs-12_x",
+    "yarn",
+    "erlang",
+    "elixir",
+    "dotnet-sdk_3"
+]
