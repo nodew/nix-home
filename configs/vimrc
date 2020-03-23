@@ -1,6 +1,7 @@
 set nocompatible
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
+let NERDTreeShowHidden=1
 map <C-n> :NERDTreeToggle<CR>
 set laststatus=2
 syntax on
@@ -9,6 +10,8 @@ colorscheme molokai
 syntax enable
 set nu
 set history=512
+set relativenumber
+set number
 set autowrite
 set autoread
 set clipboard+=unnamed

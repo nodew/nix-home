@@ -3,11 +3,27 @@
 with import <nixpkgs> {};
 with builtins;
 with lib;
-
+let
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  homePkgs = (map (name:
+                      getAttrFromPath (splitString "." name) pkgs)
+                  (fromJSON (readFile ./packages.json)));
+in
 {
-    home.packages =
-        map (name: getAttrFromPath (splitString "." name) pkgs) (fromJSON (readFile ./packages.json));
-
+    home.sessionVariables = {
+        NIX_IGNORE_SYMLINK_STORE = 1;
+    };
+    
+    home.packages = 
+        [
+            (all-hies.selection { selector = p: { inherit (p) ghc882 ghc865 ghc843; }; })
+        ] ++ homePkgs;
+    
+    services.lorri.enable = true;
+    
+    programs.htop.enable = true;
+    programs.direnv.enable = true;
+  
     programs.git = {
         enable = true;
         userName = "Joe Wang";
@@ -54,10 +70,6 @@ with lib;
     programs.vim = {
         enable = true;
         extraConfig = readFile configs/vimrc;
-        settings = {
-            relativenumber = true;
-            number = true;
-        };
         plugins = with pkgs.vimPlugins; [
             sensible
             vim-airline
@@ -73,8 +85,4 @@ with lib;
         extraConfig = readFile configs/tmux.conf;
         keyMode = "vi";
     };
-
-    programs.htop.enable = true;
-
-    programs.direnv.enable = true;
 }

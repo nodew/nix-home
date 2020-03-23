@@ -1,7 +1,11 @@
 [
+    "unzip",
+    "wget",
     "fortune",
     "openssl",
-
+    "gnupg",
+    "niv",
+    
     "gcc",
 
     "cabal-install",
