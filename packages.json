@@ -5,18 +5,27 @@
     "openssl",
     "gnupg",
     "niv",
-    
+    "whois",
+    "gnumake",
+    "jq",
+    "silver-searcher",
+
+    "emacs",
+
     "gcc",
+    "gdb",
 
     "cabal-install",
     "cabal2nix",
     "stack",
     "ghc",
 
-    "python3",
-    "racket",
     "rustc",
     "cargo",
+    "rls",
+
+    "python3",
+    "racket",
     "go",
     "nodejs-12_x",
     "yarn",

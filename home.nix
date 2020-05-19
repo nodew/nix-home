@@ -1,29 +1,24 @@
-{pkgs, ...}:
-
-with import <nixpkgs> {};
-with builtins;
-with lib;
 let
-  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
-  homePkgs = (map (name:
-                      getAttrFromPath (splitString "." name) pkgs)
-                  (fromJSON (readFile ./packages.json)));
+    sources = import ./nix/sources.nix {};
+    pkgs = import sources.nixpkgs {};
+    lib = pkgs.lib;
+    homePkgs = (map (name:
+                      lib.attrsets.getAttrFromPath (lib.splitString "." name) pkgs)
+                  (builtins.fromJSON (builtins.readFile ./packages.json)));
 in
 {
     home.sessionVariables = {
         NIX_IGNORE_SYMLINK_STORE = 1;
     };
-    
-    home.packages = 
-        [
-            (all-hies.selection { selector = p: { inherit (p) ghc882 ghc865 ghc843; }; })
-        ] ++ homePkgs;
-    
+
+    home.packages = homePkgs;
+
     services.lorri.enable = true;
-    
+
+    programs.home-manager.enable = true;
     programs.htop.enable = true;
     programs.direnv.enable = true;
-  
+
     programs.git = {
         enable = true;
         userName = "Joe Wang";
@@ -69,7 +64,7 @@ in
 
     programs.vim = {
         enable = true;
-        extraConfig = readFile configs/vimrc;
+        extraConfig = builtins.readFile dotfiles/.vimrc;
         plugins = with pkgs.vimPlugins; [
             sensible
             vim-airline
@@ -82,7 +77,23 @@ in
 
     programs.tmux = {
         enable = true;
-        extraConfig = readFile configs/tmux.conf;
+        extraConfig = builtins.readFile dotfiles/tmux.conf;
         keyMode = "vi";
+    };
+
+    home.file = {
+        ".profile".source = dotfiles/.profile;
+
+        ".emacs.d" = {
+            source = pkgs.fetchFromGitHub {
+                owner = "syl20bnr";
+                repo = "spacemacs";
+                rev = "d46eacd8";
+                sha256 = "1r8q7bnszkrxh4q9l78n6xgxflpc52hcd18d3n9kc5r8xma20387";
+            };
+            recursive = true;
+        };
+
+        ".spacemacs".source = dotfiles/.spacemacs;
     };
 }
