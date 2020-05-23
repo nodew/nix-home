@@ -11,10 +11,13 @@ in
         NIX_IGNORE_SYMLINK_STORE = 1;
     };
 
+    # packages
     home.packages = homePkgs;
 
+    # services
     services.lorri.enable = true;
 
+    # program modules
     programs.home-manager.enable = true;
     programs.htop.enable = true;
     programs.direnv.enable = true;
@@ -81,6 +84,7 @@ in
         keyMode = "vi";
     };
 
+    # extra dotfiles
     home.file = {
         ".profile".source = dotfiles/.profile;
 

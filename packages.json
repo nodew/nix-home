@@ -1,35 +1,36 @@
 [
-    "unzip",
-    "wget",
+    "cachix",
     "fortune",
-    "openssl",
-    "gnupg",
-    "niv",
-    "whois",
-    "gnumake",
-    "jq",
-    "silver-searcher",
-
-    "emacs",
-
     "gcc",
     "gdb",
+    "gnupg",
+    "gnumake",
+    "jq",
+    "niv",
+    "openssl",
+    "silver-searcher",
+    "unzip",
+    "wget",
+    "whois",
+
+    "emacs",
 
     "cabal-install",
     "cabal2nix",
     "stack",
     "ghc",
+    "haskellPackages.ghcide",
 
     "rustc",
     "cargo",
     "rls",
 
+    "dotnet-sdk_3",
     "python3",
     "racket",
     "go",
     "nodejs-12_x",
     "yarn",
     "erlang",
-    "elixir",
-    "dotnet-sdk_3"
+    "elixir"
 ]
