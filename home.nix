@@ -87,6 +87,7 @@ in
     # extra dotfiles
     home.file = {
         ".profile".source = dotfiles/.profile;
+        ".bashrc".source = dotfiles/.bashrc;
 
         ".emacs.d" = {
             source = pkgs.fetchFromGitHub {
