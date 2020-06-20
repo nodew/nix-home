@@ -22,10 +22,9 @@
     "ghc",
     "haskellPackages.ghcide",
 
-    "rustc",
-    "cargo",
-    "rls",
+    "rustup",
 
+    "openjdk14",
     "dotnet-sdk_3",
     "python3",
     "racket",
