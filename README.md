@@ -14,5 +14,5 @@ sh <(curl https://nixos.org/nix/install)
 git clone https://github.com/nodew/nix-home.git
 cd nix-home
 nix-shell
-home-manager build -f ./machines/wsl2.nix
+home-manager switch -f ./machines/wsl2.nix
 ```
