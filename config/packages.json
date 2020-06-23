@@ -5,16 +5,16 @@
     "gdb",
     "gnupg",
     "gnumake",
+    "gzip",
     "jq",
     "niv",
+    "nix-prefetch-scripts",
     "openssl",
+    "powershell",
     "silver-searcher",
     "unzip",
     "wget",
     "whois",
-    "powershell",
-
-    "emacs",
 
     "cabal-install",
     "cabal2nix",
@@ -23,7 +23,6 @@
     "haskellPackages.ghcide",
 
     "rustup",
-
     "openjdk14",
     "dotnet-sdk_3",
     "python3",

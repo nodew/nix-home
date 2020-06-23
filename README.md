@@ -13,6 +13,6 @@ sh <(curl https://nixos.org/nix/install)
 ```shell
 git clone https://github.com/nodew/nix-home.git
 cd nix-home
-ln -s `pwd` ~/.config/nixpkgs
-nix-shell --run "home-manager switch"
+nix-shell
+home-manager build -f ./machines/wsl2.nix
 ```

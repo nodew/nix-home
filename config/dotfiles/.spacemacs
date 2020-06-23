@@ -71,10 +71,4 @@
   )
 
 (defun dotspacemacs/user-config ()
-  ;; haskell-mode
-  (setq lsp-haskell-process-path-hie "hie-wrapper")
-  (setq lsp-response-timeout 60)
-  (require 'lsp-haskell)
-  (add-hook 'haskell-mode-hook #'lsp)
-  (add-hook 'haskell-mode-hook #'direnv-update-environment)
   )

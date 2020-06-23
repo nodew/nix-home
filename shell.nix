@@ -7,4 +7,7 @@ pkgs.mkShell {
     buildInputs = [
         home-manager.home-manager
     ];
+    shellHook = ''
+        export NIX_PATH="nixpkgs=${sources.nixpkgs}"
+    '';
 }
