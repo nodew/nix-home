@@ -126,3 +126,12 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# do not populate global nix profile to nix-shell
+if [ -z "$IN_NIX_SHELL" ] ; then
+    if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] ; then
+        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    fi
+
+    [ -f ~/.zshrc ] && exec $(which zsh)
+fi

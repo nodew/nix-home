@@ -4,9 +4,3 @@ if [ -n "$BASH_VERSION" ]; then
     . "$HOME/.bashrc"
     fi
 fi
-
-if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ] ; then
-    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-fi
-
-[ -f ~/.zshrc ] && exec $(which zsh)
