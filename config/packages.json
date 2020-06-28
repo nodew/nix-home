@@ -20,7 +20,9 @@
     "cabal2nix",
     "stack",
     "ghc",
-    "haskellPackages.ghcide",
+    "haskellPackages.hlint",
+    "haskellPackages.apply-refact",
+    "haskellPackages.hoogle",
 
     "rustup",
     "openjdk14",
