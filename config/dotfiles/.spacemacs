@@ -23,6 +23,7 @@
      syntax-checking
 
      lsp
+
      ;; Languages
      emacs-lisp
      common-lisp
@@ -39,6 +40,7 @@
 
    dotspacemacs-additional-packages
    '(direnv
+     lsp-ui
      lsp-haskell)
 
    dotspacemacs-frozen-packages '()
@@ -66,21 +68,34 @@
    ))
 
 (defun dotspacemacs/user-init ()
+  (setq exec-path-from-shell-arguments '("-i"))
   (setq configuration-layer--elpa-archives
     '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
       ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
       ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
 
 (defun dotspacemacs/user-config ()
-  (setq exec-path-from-shell-arguments '("-i"))
-  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
   (direnv-mode)
+
   (add-hook 
     'haskell-mode-hook 
     (lambda ()
       (direnv-update-environment)
       (require 'lsp-haskell)
-      (lsp)))
-  (lsp-haskell-set-hlint-on)
-  (with-eval-after-load 'lsp-mode
-    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
+      (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+      (lsp)
+      (evil-leader/set-key-for-mode 'haskell-mode "gm" 'lsp-ui-imenu)
+      (evil-leader/set-key-for-mode 'haskell-mode "gg" 'lsp-ui-peek-find-definitions)
+      (evil-leader/set-key-for-mode 'haskell-mode "gr" 'lsp-ui-peek-find-references)
+      (evil-leader/set-key-for-mode 'haskell-mode "en" 'flycheck-next-error)
+      (evil-leader/set-key-for-mode 'haskell-mode "ep" 'flycheck-previous-error)
+      (evil-leader/set-key-for-mode 'haskell-mode "el" 'flycheck-list-errors)
+      (evil-leader/set-key-for-mode 'haskell-mode "ee" 'flycheck-explain-error-at-point)
+      (evil-leader/set-key-for-mode 'haskell-mode "rR" 'lsp-rename)
+      (evil-leader/set-key-for-mode 'haskell-mode "rf" 'lsp-format-buffer)
+      (evil-leader/set-key-for-mode 'haskell-mode "ra" 'lsp-ui-sideline-apply-code-actions)
+      (evil-leader/set-key-for-mode 'haskell-mode "lr" 'lsp-restart-workspace)
+      (evil-leader/set-key-for-mode 'haskell-mode "," 'completion-at-point)
+      (evil-leader/set-key-for-mode 'haskell-mode "." 'lsp-describe-thing-at-point)
+      (lsp-haskell-set-hlint-on)
+      )))
